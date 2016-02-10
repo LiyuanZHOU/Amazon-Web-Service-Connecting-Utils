@@ -1,0 +1,13 @@
+instancePrice(){
+	INSTANCE_TYPE="$1"
+	TODAY=`date '+%Y-%m-%dT%H:%M:%S'`
+	LAST_WEEK=`date -d "last week" '+%Y-%m-%dT%H:%M:%S'`
+	arry=`aws ec2 describe-spot-price-history --instance-types $INSTANCE_TYPE --product-description "Linux/UNIX (Amazon VPC)" --availability-zone "ap-southeast-2b" --start-time $LAST_WEEK --end-time $TODAY| awk '{print $5}'`
+	# sort unique values and use the second price + 0.01 to avoid outlayers
+	MAX_PRICE=`echo $arry | tr ' ' '\n' | sort -nur | head -n 2 | tail -n 1`
+	BID_PRICE=0$(echo $MAX_PRICE + 0.01 | bc)
+	echo $BID_PRICE
+}
+
+ 
+export -f instancePrice

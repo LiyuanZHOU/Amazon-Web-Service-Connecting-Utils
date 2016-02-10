@@ -1,0 +1,17 @@
+{
+  "ImageId": "SYSTEM_IMAGE",
+  "KeyName": "DL_gpu",
+  "InstanceType": "INSTANCE_TYPE",
+  "BlockDeviceMappings": [
+    {
+      "VirtualName": "ephemeral0",
+      "DeviceName": "/dev/sdb"
+    },
+    {
+      "VirtualName": "ephemeral1",
+      "DeviceName": "/dev/sdc"
+    }
+  ],
+  "SubnetId": "subnet-0fcdf77b",
+  "SecurityGroupIds": ["sg-9b9d5efe"]
+}
